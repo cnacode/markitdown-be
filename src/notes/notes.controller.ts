@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { get } from 'node:http';
 import { Note } from './note.model';
-import { CreateNoteDTO } from './notes.dto';
+import { CreateNoteDTO, GetNotesFiltersDTO } from './notes.dto';
 import { NotesService } from './notes.service';
 
 @Controller('notes')
@@ -12,9 +13,18 @@ export class NotesController {
     return this.noteService.getAllNotes();
   }
 
+  @Get('/:userId')
+  getAllNotesForUser(
+    @Param('userId') userId: string,
+    @Query('q') filters: GetNotesFiltersDTO,
+  ) {
+    return this.noteService.getAllNotesForUser({ userId });
+  }
+
   @Post()
-  createNote(@Body() body: CreateNoteDTO): Note {
-    const note: Note = this.noteService.createNote({ body });
+  createNote(@Body() requestBody: CreateNoteDTO): Note {
+    const { body: noteBody } = requestBody;
+    const note: Note = this.noteService.createNote({ noteBody });
     return note;
   }
 }
