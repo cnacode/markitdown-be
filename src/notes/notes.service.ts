@@ -9,7 +9,7 @@ export class NotesService {
     return this.notes;
   }
 
-  createNote({ body }): Note {
+  createNote({ noteBody: body }: { noteBody: string }): Note {
     const updatedAt = Date.now();
 
     const note: Note = {
@@ -19,5 +19,9 @@ export class NotesService {
     };
 
     return note;
+  }
+
+  getAllNotesForUser({ userId }: { userId: string }) {
+    return [];
   }
 }
