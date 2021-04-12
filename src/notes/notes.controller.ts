@@ -8,17 +8,17 @@ import { NotesService } from './notes.service';
 export class NotesController {
   constructor(private noteService: NotesService) {}
 
-  @Get()
-  getAllNotes(): Note[] {
-    return this.noteService.getAllNotes();
-  }
-
   @Get('/:userId')
   getAllNotesForUser(
     @Param('userId') userId: string,
-    @Query('q') filters: GetNotesFiltersDTO,
+    @Query() filters: GetNotesFiltersDTO,
   ) {
-    return this.noteService.getAllNotesForUser({ userId });
+    return this.noteService.getAllNotesForUser({ userId, filters });
+  }
+
+  @Get('/:userId')
+  getNoteCountForUser(@Param('userId') userId: string) {
+    return this.noteService.getNoteCountForUser({ userId });
   }
 
   @Post()

@@ -21,7 +21,11 @@ export class NotesService {
     return note;
   }
 
-  getAllNotesForUser({ userId }: { userId: string }) {
+  getAllNotesForUser({ userId, filters }: getAllNotesForUserDTO) {
     return [];
+  }
+
+  getNoteCountForUser({ userId }: getNoteCountForUserDTO) {
+    return 10;
   }
 }

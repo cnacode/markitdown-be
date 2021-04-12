@@ -7,4 +7,6 @@ export class CreateNoteDTO {
   status: NoteStatus;
 }
 
-export class GetNotesFiltersDTO {}
+export class GetAllNotesForUserDTO {}
+
+export class GetAllNotesForUserDTO {}
